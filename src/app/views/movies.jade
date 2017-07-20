@@ -1,0 +1,43 @@
+extends layout/base
+
+block head
+  title= title
+
+block body
+  nav.navbar.navbar-inverse
+    div.container-fluid
+      div.navbar-header
+        button(type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar")
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand(href="#") Logo
+      div#myNavbar.collapse.navbar-collapse
+        ul.nav.navbar-nav
+          li.active
+            a(href="/movies") Movies
+          li
+            a(href="/extras") Extra
+          li
+            a(href="/") Home
+        form.navbar-form.navbar-right(role="search")
+          div.form-group.input-group
+            input(type="text").form-control(placeholder="Search..")
+            span.input-group-btn
+              button.btn.btn-default(type="button")
+                span.glyphicon.glyphicon-search
+        ul.nav.navbar-nav.navbar-right
+          li:a(href="#")
+            span.glyphicon.glyphicon-user My Account
+  div.row
+    div.col-lg-6.col-lg-offset-3.text-center
+      h1
+        | This is movie page!!!
+  //h1= title
+  //h3 found a total of #[span#count= movies.length] movie(s):
+  //div#movie-list
+  //  ul.list
+  //    each movie in movies
+  //      li.movie
+  //        a(href='#{movie.url}')= movie.title + ' (' + movie.year + ')'
+  //        p= movie.text
