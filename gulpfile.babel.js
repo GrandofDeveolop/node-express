@@ -60,6 +60,10 @@ const PATHS = {
   helpers: {
     src: path.join(SRC, 'app/helpers/**/*.js'),
     dest: path.join(DEST, 'app/helpers')
+  },
+  languages:{
+    src:path.join(SRC, 'language/**/*.json'),
+    dest:path.join(DEST, 'language')
   }
 };
 
@@ -71,7 +75,7 @@ const CLIENT = new Set(['styles', 'images', 'scripts', 'files', 'fonts']);
 // server-related set, i.e. ALL - CLIENT
 const SERVER = new Set([...ALL].filter(el => !CLIENT.has(el)));
 // set of things that need to be transpiled, i.e. SERVER - {'views'}
-const TRANSPILE = new Set([...SERVER].filter(el => el !== 'views'));
+const TRANSPILE = new Set([...SERVER].filter(el => el !== 'views' && el !== 'languages'));
 // set of things that need to be linted, i.e. TRANSPILE ∪ {'scripts'}
 const LINT = new Set([...TRANSPILE, 'scripts']);
 
@@ -107,7 +111,7 @@ gulp.task('build', ['build:client', 'build:server']);
 // build client-side files
 gulp.task('build:client', [...CLIENT].concat('bower'));
 // build server-side files
-gulp.task('build:server', ['transpile', 'views', 'ln']);
+gulp.task('build:server', ['transpile', 'views', 'languages', 'ln']);
 
 // optimize images
 gulp.task('images', () =>
@@ -231,23 +235,9 @@ gulp.task('bower:css', () =>
     .pipe($.print(fp => `bower: ${fp}`))
 );
 
-// returns a function that lints the files in src
-const lintTask = src =>
-  () =>
-    gulp.src(src)
-      .pipe($.eslint())
-      .pipe($.eslint.formatEach())
-      .pipe($.eslint.failAfterError());
-// create lint tasks for client and server scripts
-for (const task of LINT) gulp.task(`lint:${task}`, lintTask(PATHS[task].src));
-// lint this gulpfile
-gulp.task('lint:gulpfile', lintTask('gulpfile.babel.js'));
-// lint everything!
-gulp.task('lint', [...LINT].map(el => `lint:${el}`).concat('lint:gulpfile'));
-
 // create transpile tasks for server scripts
 for (const task of TRANSPILE) {
-  gulp.task(`transpile:${task}`, [`lint:${task}`], () =>
+  gulp.task(`transpile:${task}`, () =>
     gulp.src(PATHS[task].src)
       .pipe($.changed(PATHS[task].dest))
       .pipe($.babel())
@@ -264,6 +254,14 @@ gulp.task('views', () =>
     .pipe($.changed(PATHS.views.dest))
     .pipe(gulp.dest(PATHS.views.dest))
     .pipe($.print(fp => `view: ${fp}`))
+);
+
+// copy languages over to destination
+gulp.task('languages', () =>
+        gulp.src(PATHS.languages.src)
+            .pipe($.changed(PATHS.languages.dest))
+            .pipe(gulp.dest(PATHS.languages.dest))
+            .pipe($.print(fp => `view: ${fp}`))
 );
 
 // symlink package.json and node_modules to destination

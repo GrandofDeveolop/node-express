@@ -15,10 +15,59 @@ import './app/models'; // this MUST be done before controllers
 import config from './config';
 import controllers from './app/controllers';
 import logger from './app/helpers/logger';
+import session from 'express-session';
 
 // EXPRESS SET-UP
 // create app
 const app = express();
+var i18n = require('i18n');
+
+i18n.configure({
+
+//define how many languages we would support in our application
+  locales:['en', 'dk'],
+
+//define the path to language json files, default is /locales
+  directory: __dirname + '/language',
+
+//define the default language
+  defaultLocale: 'en',
+
+  queryParameter: 'lang',
+
+  // setting of log level DEBUG - default to require('debug')('i18n:debug')
+  logDebugFn: function (msg) {
+    console.log('debug', msg);
+  },
+
+  // setting of log level WARN - default to require('debug')('i18n:warn')
+  logWarnFn: function (msg) {
+    console.log('warn', msg);
+  },
+
+  // setting of log level ERROR - default to require('debug')('i18n:error')
+  logErrorFn: function (msg) {
+    console.log('error', msg);
+  },
+
+
+// define a custom cookie name to parse locale settings from
+  cookie: 'i18n'
+});
+
+i18n.setLocale('dk');
+
+app.use(cookieParser("i18n_demo"));
+
+app.use(session({
+  secret: "i18n_demo",
+  resave: true,
+  saveUninitialized: true,
+  cookie: { maxAge: 60000 }
+}));
+
+//init i18n after cookie-parser
+app.use(i18n.init);
 // use jade and set views and static directories
 app.set('view engine', 'jade');
 app.set('views', path.join(config.root, 'app/views'));

@@ -11,88 +11,93 @@ block body
          span.icon-bar
          span.icon-bar
          span.icon-bar
-       a.navbar-brand(href="#") Logo
+       a.navbar-brand(href="#") #{i18n.__("Logo")}
      div#myNavbar.collapse.navbar-collapse
         ul.nav.navbar-nav
           li
-            a(href="/movies") Movies
+            a(href="/movies") #{i18n.__("Movies")}
           li
-            a(href="/extras") Extra
+            a(href="/extraes") #{i18n.__("Extras")}
           li.active
-            a(href="/") Home
+            a(href="/") #{i18n.__("Home")}
         form.navbar-form.navbar-right(role="search")
           div.form-group.input-group
-            input(type="text").form-control(placeholder="Search..")
+            input(type="text").form-control(placeholder="...")
             span.input-group-btn
               button.btn.btn-default(type="button")
                 span.glyphicon.glyphicon-search
         ul.nav.navbar-nav.navbar-right
+          li(style='top:10px;')
+            button(onclick="replace_language('?lang=EN')") EN
+          li(style='top:10px;')
+            button(onclick="replace_language('?lang=DK')") DK
+        ul.nav.navbar-nav.navbar-right
           li
             a(href="#")
               span.glyphicon.glyphicon-user
-              |  My Account
+              |  #{i18n.__("My account")}
 
   div.container.text-center
     div.row
       div.col-sm-3.well
         div.well
           p
-            a(href="#") My Profile
+            a(href="#") #{i18n.__("W3School")}
           img(src="/img/1.png").img-circle(height="65" width="65" alt="Avatar")
         div.well
           p
-            a(href="#") Interests
+            a(href="#") #{i18n.__("Anja")}
           p
             span.label.label-default
-              |News
+              | #{i18n.__("Jane")}
             span.label.label-primary
-              |W3Schools
+              | #{i18n.__("Interests")}
             span.label.label-success
-              |Labels
+              | #{i18n.__("New")}
          div.alert.alert-success.fade.in
            a(href="#").close(data-dismiss="alert" aria-label="close")
            p
-             strong Ey!
-           | People are looking at your profile. Find out who.
+             strong #{i18n.__("People are looking at your profile. Find out who.")}
+           | 111
         p
-          a(href="#") Link
+          a(href="#") #{i18n.__("I am a student.")}
         p
-          a(href="#") Link
+          a(href="#") #{i18n.__("I am a student.")}
         p
-          a(href="#") Link
+          a(href="#") #{i18n.__("I am a student.")}
       div.col-sm-7
         div.row
           div.col-sm-12
             div.panel.panel-default.text-left
               div.panel-body
-                p(contenteditable="true") Status: Feeling Blue
+                p(contenteditable="true") #{i18n.__("My account")}
                 button(type="button").btn.btn-default.btn-sm
-                  span.glyphicon.glyphicon-thumbs-up Like
+                  span.glyphicon.glyphicon-thumbs-up 111
         div.row
           div.col-sm-3
             div.well
-              p John
+              p 111
               img(src="/img/2.png").img-circle(height="55" width="55" alt="Avatar")
           div.col-sm-9
             div.well
-              p I am a student.
+              p 111
         div.row
           div.col-sm-3
             div.well
-              p Bo
+              p 111
               img(src="/img/3.png").img-circle(height="55" width="55" alt="Avatar")
           div.col-sm-9
             div.well
-              p I am a student.
+              p 111
         div.row
           div.col-sm-3
             div.well
-              p Jane
+              p 1111
               img(src="/img/1.png").img-circle(height="55" width="55" alt="Avatar")
 
           div.col-sm-9
             div.well
-              p I am a student.
+              p 1111
         div.row
           div.col-sm-3
             div.well
@@ -100,20 +105,20 @@ block body
               img(src="/img/4.jpg").img-circle(height="55" width="55" alt="Avatar")
           div.col-sm-9
             div.well
-              p I am a student.
+              p 111
       div.col-sm-2.well
         div.thumbnail
-          p Upcoming Events:
+          p 1111
           img(src="/img/6.png" alt="Paris" width="400" height="300")
           p
             strong Paris
-          p Fri. 27 November 2015
+          p 1111
           button.btn.btn-primary.Info
         div.well
-          p ADS
+          p 1111
         div.well
-          p ADS
+          p 1111
 
 
   footer.container-fluid.text-center
-    p Copy right Daniel... 2017
+    p #{i18n.__("Copy right Daniel... 2017")}
