@@ -24,6 +24,15 @@ router.get('/extraes', (req, res, next) => res.render('extras', {
     title: 'node-express',
     i18n: res
 }));
+
+router.get('/login', (req, res, next) => res.render('login', {
+    title: 'node-express',
+    i18n: res
+}));
+router.get('/signup', (req, res, next) => res.render('signup', {
+    title: 'node-express',
+    i18n: res
+}));
 // note that `movies` will likely be empty because the local mongodb is empty.
 // you can populate it with example data by downloading it here:
 // https://gist.githubusercontent.com/thekelvinliu/152f2c488430be9b6649c963d5a2afea/raw/22d73b73fb653c091d4a5ffe470299d64a0d0fb7/movies

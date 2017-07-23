@@ -1,0 +1,62 @@
+extends layout/base
+block head
+   title= title
+block body
+   nav.navbar.navbar-inverse
+      div.container-fluid
+         div.navbar-header
+            button(type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar")
+               span.icon-bar
+               span.icon-bar
+               span.icon-bar
+            a.navbar-brand(href="#") #{i18n.__("Logo")}
+         div#myNavbar.collapse.navbar-collapse
+            ul.nav.navbar-nav
+               li
+                  a(href="/movies") #{i18n.__("Movies")}
+               li
+                  a(href="/extraes") #{i18n.__("Extras")}
+               li.active
+                  a(href="/") #{i18n.__("Home")}
+               li
+                  a(href="/login") login
+               li
+                  a(href="/signup") signup
+            form.navbar-form.navbar-right(role="search")
+               div.form-group.input-group
+                  input(type="text").form-control(placeholder="...")
+                  span.input-group-btn
+                     button.btn.btn-default(type="button")
+                        span.glyphicon.glyphicon-search
+            ul.nav.navbar-nav.navbar-right
+               li(style='top:10px;')
+                  button(onclick="replace_language('?lang=EN')") EN
+               li(style='top:10px;')
+                  button(onclick="replace_language('?lang=DK')") DK
+            ul.nav.navbar-nav.navbar-right
+               li
+                  a(href="#")
+                     span.glyphicon.glyphicon-user
+                     |  #{i18n.__("My account")}
+   div
+      .container
+         .col-sm-6.col-sm-offset-3
+            h1
+               span.fa.fa-sign-in
+               |  #{i18n.__("login")}
+            form(action='/login', method='post')
+               .form-group
+                  label #{i18n.__("email")}
+                  input.form-control(type='text', name='email')
+               .form-group
+                  label #{i18n.__("password")}
+                  input.form-control(type='password', name='password')
+               button.btn.btn-warning.btn-lg(type='submit') #{i18n.__("login")}
+            hr
+            p
+               | Need an account?
+               a(href='/signup') Signup
+            p
+               | Or go
+               a(href='/') home
+               | .

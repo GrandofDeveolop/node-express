@@ -5,14 +5,14 @@ block head
 
 block body
   nav.navbar.navbar-inverse
-   div.container-fluid
-     div.navbar-header
-       button(type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar")
-         span.icon-bar
-         span.icon-bar
-         span.icon-bar
-       a.navbar-brand(href="#") #{i18n.__("Logo")}
-     div#myNavbar.collapse.navbar-collapse
+    div.container-fluid
+      div.navbar-header
+        button(type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar")
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand(href="#") #{i18n.__("Logo")}
+      div#myNavbar.collapse.navbar-collapse
         ul.nav.navbar-nav
           li
             a(href="/movies") #{i18n.__("Movies")}
@@ -20,6 +20,10 @@ block body
             a(href="/extraes") #{i18n.__("Extras")}
           li.active
             a(href="/") #{i18n.__("Home")}
+          li
+            a(href="/login") login
+          li
+            a(href="/signup") signup
         form.navbar-form.navbar-right(role="search")
           div.form-group.input-group
             input(type="text").form-control(placeholder="...")

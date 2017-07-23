@@ -25,5 +25,9 @@
   "I am a student.":"I am a student.",
   "Copy right Daniel... 2017":"Copy right Daniel... 2017",
   "This is movie page!!!":"This is movie page!!!",
-  "This is Extra page!!!":"This is Extra page!!!"
+  "This is Extra page!!!":"This is Extra page!!!",
+  "name":"name",
+  "password":"password",
+  "email":"email",
+  "signup":"signup"
 }
