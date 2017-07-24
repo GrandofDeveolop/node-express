@@ -88,6 +88,15 @@ router.get('/movies', (req, res, next) => {
             movies
         }))
 });
+router.get('/logout', (req, res, next) => {
+    req.logout();
+    req.session.save((err) => {
+        if (err) {
+            return next(err);
+        }
+        res.redirect('/');
+    });
+});
 //router.get('/extras', (req, res, next) => {
 //    Extras
 //        .find()

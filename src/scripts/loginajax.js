@@ -25,7 +25,8 @@ $(document).ready(function() {
                 if(data.includes('sussess'))
                 {
                     alert('Successful!');
-                    window.location.href='/';
+                    document.cookie="logged";
+                    window.location.href='/'+localStorage.getItem('language');
                 }
 
             });

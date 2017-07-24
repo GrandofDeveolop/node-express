@@ -22,7 +22,7 @@ $(document).ready(function() {
                     if(data.indexOf('fail')<0)
                     {
                         alert(data);
-                        window.location.href='/';
+                        window.location.href='/'+localStorage.getItem('language');
 
                     }
                     else{

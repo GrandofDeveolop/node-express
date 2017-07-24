@@ -45,11 +45,11 @@ block body
          div#myNavbar.collapse.navbar-collapse
             ul.nav.navbar-nav
                li
-                  a(href="/") #{i18n.__("Home")}
+                  a(onclick="direct_url('/')") #{i18n.__("Home")}
                li.active
-                  a(href="/login") login
+                  a(onclick="direct_url('/login')") login
                li
-                  a(href="/signup") signup
+                  a(onclick="direct_url('/signup')") signup
             form.navbar-form.navbar-right(role="search")
                div.form-group.input-group
                   input.form-control(type="text" placeholder="...")

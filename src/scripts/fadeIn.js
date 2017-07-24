@@ -1,5 +1,6 @@
 $(document).ready(() => {
-  $('#wrapper').fadeIn(500);
+  $('#login').display=none;
+  //$('#wrapper').fadeIn(500);
 
 
 });

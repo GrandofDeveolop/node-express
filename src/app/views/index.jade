@@ -15,11 +15,13 @@ block body
       div#myNavbar.collapse.navbar-collapse
         ul.nav.navbar-nav
           li.active
-            a(href="/") #{i18n.__("Home")}
-          li
-            a(href="/login") login
-          li
-            a(href="/signup") signup
+            a(onclick="direct_url('/')") #{i18n.__("Home")}
+          li#login
+            a(onclick="direct_url('/login')") login
+          li#signup
+            a(onclick="direct_url('/signup')") signup
+          li#logout
+            a(href="/logout") log out
         form.navbar-form.navbar-right(role="search")
           div.form-group.input-group
             input.form-control(type="text" placeholder="...")
