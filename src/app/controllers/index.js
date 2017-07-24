@@ -38,9 +38,19 @@ router.post('/login', passport.authenticate('local', { failureRedirect: '/login'
         if (err) {
             return next(err);
         }
-        res.redirect('/');
+        res.json("sussess");
     });
 });
+//router.post('/login', (req, res, next) => {
+//     passport.authenticate('local', { failureRedirect: '/login', failureFlash: true });
+//    console.log(req.body.username,req.body.password);
+//    req.session.save((err) => {
+//        if (err) {
+//            return next(err);
+//        }
+//        res.json(req.body);
+//    });
+//});
 router.get('/signup', (req, res, next) => res.render('signup', {
     title: 'node-express',
     i18n: res
@@ -49,7 +59,8 @@ router.post('/signup', (req, res, next) => {
     console.log(req.body.username,req.body.password);
     Account.register(new Account({ username : req.body.username }), req.body.password, (err, account) => {
         if (err) {
-            //return res.render('register', { error : err.message });
+            //res.json('fail');
+            return res.render('register', { error : err.message });
         }
         console.log(req.body.username,req.body.password);
         passport.authenticate('local')(req, res, () => {
@@ -57,7 +68,8 @@ router.post('/signup', (req, res, next) => {
                 if (err) {
                     return next(err);
                 }
-                res.redirect('/');
+                res.json('sussess');
+                //res.redirect('/');
             });
         });
     });
