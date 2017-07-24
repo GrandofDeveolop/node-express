@@ -16,14 +16,18 @@ $(document).ready(function() {
         })
             .done(function(data) {
                 console.log(data);
+                console.log('ddd');
                 if(!data)
                 {
-                    alert('fail');
+
+                    alert('Failed!');
                 }
                 if(data.includes('sussess'))
                 {
+                    alert('Successful!');
                     window.location.href='/';
                 }
+
             });
         event.preventDefault();
     });

@@ -59,7 +59,7 @@ router.post('/signup', (req, res, next) => {
     console.log(req.body.username,req.body.password);
     Account.register(new Account({ username : req.body.username }), req.body.password, (err, account) => {
         if (err) {
-            //res.json('fail');
+            res.json('fail');
             return res.render('register', { error : err.message });
         }
         console.log(req.body.username,req.body.password);

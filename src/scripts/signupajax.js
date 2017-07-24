@@ -17,9 +17,18 @@ $(document).ready(function() {
                 {
                     alert('fail');
                 }
-                if(data.includes('sussess'))
+                else
                 {
-                    window.location.href='/';
+                    if(data.indexOf('fail')<0)
+                    {
+                        alert(data);
+                        window.location.href='/';
+
+                    }
+                    else{
+                        alert(data);
+
+                    }
                 }
             });
         event.preventDefault();

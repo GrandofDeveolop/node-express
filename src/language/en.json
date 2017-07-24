@@ -30,6 +30,6 @@
   "password":"password",
   "email":"email",
   "signup":"signup",
-  "Need an account":"Need an account",
-  "Already have an account":"Already have an account"
+  "Need":"Need",
+  "Already":"Already"
 }
