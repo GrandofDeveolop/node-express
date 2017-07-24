@@ -49,9 +49,9 @@ router.post('/signup', (req, res, next) => {
     console.log(req.body.username,req.body.password);
     Account.register(new Account({ username : req.body.username }), req.body.password, (err, account) => {
         if (err) {
-            return res.render('register', { error : err.message });
+            //return res.render('register', { error : err.message });
         }
-
+        console.log(req.body.username,req.body.password);
         passport.authenticate('local')(req, res, () => {
             req.session.save((err) => {
                 if (err) {
