@@ -16,7 +16,9 @@ import config from './config';
 import controllers from './app/controllers';
 import logger from './app/helpers/logger';
 import session from 'express-session';
-
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var flash = require('connect-flash');
 // EXPRESS SET-UP
 // create app
 const app = express();
@@ -81,6 +83,19 @@ app.use(compress());
 app.use(cookieParser());
 app.use(favicon(path.join(config.root, 'static/img/favicon.png')));
 app.use(helmet());
+
+
+//dineil
+app.use(passport.initialize());
+app.use(flash());
+app.use(passport.session());
+var Account = require('./app/models/account');
+passport.use(new LocalStrategy(Account.authenticate()));
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
+
+
+
 // set all controllers
 app.use('/', controllers);
 // catch 404 and forward to error handler

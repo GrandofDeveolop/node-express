@@ -5,6 +5,8 @@
 import { Router } from 'express';
 import mongoose from 'mongoose';
 import extrasController from './extras';
+const passport = require('passport');
+const Account = require('../models/account');
 
 // load models
 const Movie = mongoose.model('Movie');
@@ -29,10 +31,37 @@ router.get('/login', (req, res, next) => res.render('login', {
     title: 'node-express',
     i18n: res
 }));
+
+router.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), (req, res, next) => {
+    console.log(req.body.username,req.body.password);
+    req.session.save((err) => {
+        if (err) {
+            return next(err);
+        }
+        res.redirect('/');
+    });
+});
 router.get('/signup', (req, res, next) => res.render('signup', {
     title: 'node-express',
     i18n: res
 }));
+router.post('/signup', (req, res, next) => {
+    console.log(req.body.username,req.body.password);
+    Account.register(new Account({ username : req.body.username }), req.body.password, (err, account) => {
+        if (err) {
+            return res.render('register', { error : err.message });
+        }
+
+        passport.authenticate('local')(req, res, () => {
+            req.session.save((err) => {
+                if (err) {
+                    return next(err);
+                }
+                res.redirect('/');
+            });
+        });
+    });
+});
 // note that `movies` will likely be empty because the local mongodb is empty.
 // you can populate it with example data by downloading it here:
 // https://gist.githubusercontent.com/thekelvinliu/152f2c488430be9b6649c963d5a2afea/raw/22d73b73fb653c091d4a5ffe470299d64a0d0fb7/movies

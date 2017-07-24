@@ -26,8 +26,10 @@
   "Copy right Daniel... 2017":"Copy right Daniel... 2017",
   "This is movie page!!!":"This is movie page!!!",
   "This is Extra page!!!":"This is Extra page!!!",
-  "name":"name",
+  "user name":"user name",
   "password":"password",
   "email":"email",
-  "signup":"signup"
+  "signup":"signup",
+  "Need an account":"Need an account",
+  "Already have an account":"Already have an account"
 }

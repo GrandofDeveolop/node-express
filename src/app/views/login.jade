@@ -13,12 +13,8 @@ block body
          div#myNavbar.collapse.navbar-collapse
             ul.nav.navbar-nav
                li
-                  a(href="/movies") #{i18n.__("Movies")}
-               li
-                  a(href="/extraes") #{i18n.__("Extras")}
-               li.active
                   a(href="/") #{i18n.__("Home")}
-               li
+               li.active
                   a(href="/login") login
                li
                   a(href="/signup") signup
@@ -46,15 +42,15 @@ block body
                |  #{i18n.__("login")}
             form(action='/login', method='post')
                .form-group
-                  label #{i18n.__("email")}
-                  input.form-control(type='text', name='email')
+                  label #{i18n.__("user name")}
+                  input.form-control(type='text', name='username')
                .form-group
                   label #{i18n.__("password")}
                   input.form-control(type='password', name='password')
                button.btn.btn-warning.btn-lg(type='submit') #{i18n.__("login")}
             hr
             p
-               | Need an account?
+               | #{i18n.__("Need")}?
                a(href='/signup') Signup
             p
                | Or go
