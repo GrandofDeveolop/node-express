@@ -20,6 +20,7 @@ const router = Router();
 // set basic routes
 router.get('/', (req, res, next) => res.render('index', {
   title: 'node-express',
+    user : req.user,
     i18n: res
 }));
 router.get('/extraes', (req, res, next) => res.render('extras', {

@@ -16,12 +16,14 @@ block body
         ul.nav.navbar-nav
           li.active
             a(onclick="direct_url('/')") #{i18n.__("Home")}
-          li#login
-            a(onclick="direct_url('/login')") login
-          li#signup
-            a(onclick="direct_url('/signup')") signup
-          li#logout
-            a(href="/logout") log out
+          if (!user)
+            li#login
+              a(onclick="direct_url('/login')") login
+            li#signup
+              a(onclick="direct_url('/signup')") signup
+          if(user)
+            li#logout
+              a(href="/logout") log out
         form.navbar-form.navbar-right(role="search")
           div.form-group.input-group
             input.form-control(type="text" placeholder="...")
@@ -34,15 +36,18 @@ block body
           li(style='top:10px;')
             button(onclick="replace_language('?lang=DK')") DK
         ul.nav.navbar-nav.navbar-right
-          li
-            a(href="#")
-              span.glyphicon.glyphicon-user
-              |  #{i18n.__("My account")}
+          if(user)
+            li
+              a(href="#")
+                span.glyphicon.glyphicon-user
+                |  #{i18n.__("My account")}
 
   div.container.text-center
     div.row
       div.col-sm-3.well
         div.well
+          if(user)
+            p You are currently logged in as #{user.username}
           p
             a(href="#") #{i18n.__("W3School")}
           img.img-circle(src="/img/1.png" height="65" width="65" alt="Avatar")
