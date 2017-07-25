@@ -41,16 +41,21 @@ block body
                     span.fa.fa-sign-in
                     |  #{i18n.__("signup")}
                 // LOGIN FORM
-                form(action='/signup', method='post')
+                if(errors)
+                    h1 input your mail correctly.
+                form#userForm(action='/signup', method='post')
                     .form-group
                         label #{i18n.__("user name")}
-                        input.form-control(type='text', name='fullname')
+                        input#name.form-control(type='text', name='fullname')
+                        label#nameerror
                     .form-group
                      label #{i18n.__("email")}
-                     input.form-control(type='text', name='username')
+                     input#email.form-control(type='text', name='username')
+                     label#emailerror
                     .form-group
                         label #{i18n.__("password")}
-                        input.form-control(type='password', name='password')
+                        input#password.form-control(type='password', name='password')
+                        label#passworderror
                     button.btn.btn-warning.btn-lg(type='submit') #{i18n.__("signup")}
                 hr
                 p

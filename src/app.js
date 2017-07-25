@@ -19,6 +19,7 @@ import session from 'express-session';
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var flash = require('connect-flash');
+var validator=require('express-validator');
 // EXPRESS SET-UP
 // create app
 const app = express();
@@ -95,7 +96,7 @@ passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
 
-
+app.use(validator());
 // set all controllers
 app.use('/', controllers);
 // catch 404 and forward to error handler

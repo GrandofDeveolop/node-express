@@ -23,6 +23,11 @@ router.get('/', (req, res, next) => res.render('index', {
     user : req.user,
     i18n: res
 }));
+router.get('/account', (req, res, next) => res.render('account', {
+    title: 'node-express',
+    user : req.user,
+    i18n: res
+}));
 router.get('/extraes', (req, res, next) => res.render('extras', {
     title: 'node-express',
     i18n: res
@@ -33,7 +38,18 @@ router.get('/login', (req, res, next) => res.render('login', {
     i18n: res
 }));
 
-router.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), (req, res, next) => {
+router.post('/login',(req, res, next) => {
+    req.checkBody("username","Enter a valid email address.").isEmail();
+    var errors=req.validationErrors();
+    if(errors)
+    {
+        console.log("here is error");
+        return res.render('login',{errors:errors,i18n: res});
+    }
+    else{
+        next();
+    }
+}, passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), (req, res, next) => {
     console.log(req.body.username,req.body.password);
     req.session.save((err) => {
         if (err) {
@@ -56,7 +72,18 @@ router.get('/signup', (req, res, next) => res.render('signup', {
     title: 'node-express',
     i18n: res
 }));
-router.post('/signup', (req, res, next) => {
+router.post('/signup',(req, res, next) => {
+    req.checkBody("username","Enter a valid email address.").isEmail();
+    var errors=req.validationErrors();
+    if(errors)
+    {
+        console.log("there is error");
+        return res.render('signup',{errors:"errors",i18n: res});
+    }
+    else{
+        next();
+    }
+}, (req, res, next) => {
     console.log(req.body.username,req.body.password);
     Account.register(new Account({ username : req.body.username }), req.body.password, (err, account) => {
         if (err) {

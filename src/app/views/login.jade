@@ -72,13 +72,15 @@ block body
             h1
                span.fa.fa-sign-in
                |  #{i18n.__("login")}
-            form(action='/login', method='post')
+            form#userForm(action='/login', method='post')
                .form-group
                   label #{i18n.__("email")}
-                  input.form-control(type='text', name='username')
+                  input#email.form-control(type='text', name='username')
+                  label#emailerror
                .form-group
                   label #{i18n.__("password")}
-                  input.form-control(type='password', name='password')
+                  input#password.form-control(type='password', name='password')
+                  label#passworderror
                button.btn.btn-warning.btn-lg(type='submit') #{i18n.__("login")}
             hr
             p

@@ -1,6 +1,18 @@
 $(document).ready(function() {
 
-    console.log("dddddddddddddddddddddddd");
+    var str=window.location.href;
+    console.log(str);
+    if(window.location.href.indexOf("?lang=")<0)
+    {
+        if(localStorage==null)
+        {
+            localStorage.setItem("language","?lang=EN");
+        }
+        console.log("clicked");
+        window.location.href=str+localStorage.getItem("language");
+        console.log("dddddddddddddddddddddddd");
+    }
+
     //if(document.cookie.indexOf('og')>0)
     //{
     //    $('#login').hide();

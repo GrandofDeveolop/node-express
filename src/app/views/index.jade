@@ -38,7 +38,7 @@ block body
         ul.nav.navbar-nav.navbar-right
           if(user)
             li
-              a(href="#")
+              a(href="/account")
                 span.glyphicon.glyphicon-user
                 |  #{i18n.__("My account")}
 
@@ -47,7 +47,7 @@ block body
       div.col-sm-3.well
         div.well
           if(user)
-            p You are currently logged in as #{user.username}
+            p #{i18n.__("You are currently logged in as")} #{user.username}
           p
             a(href="#") #{i18n.__("W3School")}
           img.img-circle(src="/img/1.png" height="65" width="65" alt="Avatar")
