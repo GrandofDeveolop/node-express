@@ -76,6 +76,10 @@ $(document).ready(function() {
 
                         alert('Failed!');
                     }
+                    if(data.indexOf('fail')>0)
+                    {
+                        alert('unregistered user!');
+                    }
                     if(data.includes('sussess'))
                     {
                         alert('Successful!');
@@ -83,7 +87,9 @@ $(document).ready(function() {
                         window.location.href='/'+localStorage.getItem('language');
                     }
 
+
                 });
+            event.preventDefault();
 
         }
         else{
@@ -111,8 +117,9 @@ $(document).ready(function() {
                 {
                     $('#passworderror').hide();
                 }
+            event.preventDefault();
         }
-        event.preventDefault();
+
     });
 
 });

@@ -18,14 +18,19 @@ const router = Router();
 // load other controllers
 
 // set basic routes
-router.get('/', (req, res, next) => res.render('index', {
-  title: 'node-express',
-    user : req.user,
-    i18n: res
-}));
+router.get('/', (req, res, next) => {
+    console.log(req.body);
+    console.log(req.session.user);
+    res.render('index', {
+        title: 'node-express',
+        user : req.session.user,
+        i18n: res
+    })
+
+});
 router.get('/account', (req, res, next) => res.render('account', {
     title: 'node-express',
-    user : req.user,
+    user : req.session.user,
     i18n: res
 }));
 router.get('/extraes', (req, res, next) => res.render('extras', {
@@ -39,25 +44,49 @@ router.get('/login', (req, res, next) => res.render('login', {
 }));
 
 router.post('/login',(req, res, next) => {
-    req.checkBody("username","Enter a valid email address.").isEmail();
-    var errors=req.validationErrors();
-    if(errors)
-    {
-        console.log("here is error");
-        return res.render('login',{errors:errors,i18n: res});
-    }
-    else{
-        next();
-    }
-}, passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), (req, res, next) => {
-    console.log(req.body.username,req.body.password);
-    req.session.save((err) => {
-        if (err) {
-            return next(err);
+        req.checkBody("username","Enter a valid email address.").isEmail();
+        var errors=req.validationErrors();
+        if(errors)
+        {
+            //res.json("login failed");
+            console.log("here is error");
+            //return;
+            return res.render('login',{errors:errors,i18n: res});
         }
-        res.json("sussess");
+        else{
+            console.log('pass post');
+            next();
+        }
+    },(req,res,next) => {
+        console.log("next1");
+        passport.authenticate('local',function(err,user,info){
+
+        if(err) {return next(err);}
+        console.log("next2");
+        if(!user) {
+            console.log("no account");
+
+            return res.json('login failed');
+        }
+        else{
+            console.log("next2");
+            next();
+        }
+    })(req,res,next)}, (req, res, next) => {
+    console.log("ddd");
+    console.log(req.body);
+    req.session.user=req.body;
+        req.session.save((err) => {
+            if (err) {
+                console.log("make error");
+                //res.json("login failed");
+                return next(err);
+            }
+            console.log("make");
+            console.log(req.body.username,req.body.password);
+            res.json("sussess");
+        });
     });
-});
 //router.post('/login', (req, res, next) => {
 //     passport.authenticate('local', { failureRedirect: '/login', failureFlash: true });
 //    console.log(req.body.username,req.body.password);
@@ -90,13 +119,15 @@ router.post('/signup',(req, res, next) => {
             res.json('fail');
             return res.render('register', { error : err.message });
         }
-        console.log(req.body.username,req.body.password);
+        //console.log(req.body.username,req.body.password);
+
         passport.authenticate('local')(req, res, () => {
             req.session.save((err) => {
                 if (err) {
                     return next(err);
                 }
                 res.json('sussess');
+
                 //res.redirect('/');
             });
         });
@@ -118,12 +149,14 @@ router.get('/movies', (req, res, next) => {
 });
 router.get('/logout', (req, res, next) => {
     req.logout();
-    req.session.save((err) => {
+    req.session.destroy((err) => {
         if (err) {
             return next(err);
         }
         res.redirect('/');
     });
+    //req.session.save(
+    //});
 });
 //router.get('/extras', (req, res, next) => {
 //    Extras
